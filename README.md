@@ -12,4 +12,4 @@ Alternatively, they can send us those criterias by text and the Twilio API will 
 
 On the back-end, we use the API holding a staging version of the database.
 We send a GET request to statistics_profileactions to pull the latest activity of users.
-Then, we match the json response to the criterias the user gave us and if there is match the user is notified by text (to do this we used the SMS API)
+Then, we match the json response to the criterias the user gave us and if there is a match the user is notified by text (to do this we used the SMS API)
