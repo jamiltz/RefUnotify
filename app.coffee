@@ -1,5 +1,7 @@
 port = process.env.PORT || 3000
 host = process.env.HOST || "0.0.0.0"
+request = require 'request'
+querystring = require "querystring"
 
 require('zappajs') host, port, ->
   manifest = require './package.json'
@@ -39,18 +41,26 @@ require('zappajs') host, port, ->
 
   @get '/notifications': ->
     Notification.find {}, (err, notifications) =>
-      @response.write console.log "Error retrieving notifications:", err if err?
+      @response.write "Error retrieving notifications:", err if err?
       @response.header "Access-Control-Allow-Origin", "*"
       @response.json notifications unless err?
 
   @post '/notification/create': ->
     Notification.create @body, (err, notification) =>
-      @response.write console.log "Error saving notification", notification, err if err?
-      @response.header "Access-Control-Allow-Origin", "*"
-      @response.json notification unless err?
+      @response.write "Error saving notification", notification, err if err?
+      console.log notification
+      request.post
+        url: "http://robobo.org:8080/notify"
+        body: querystring.stringify
+          number: notification.phone
+          body: 'You have a new match from Refugees United!'
+        , (err, resp, body) =>
+          console.log "Error sending message:", err if err?
+          @response.header "Access-Control-Allow-Origin", "*"
+          @response.json notification
 
   @get '/notification/list/:uid': ->
     Notification.find {userId: @params.uid}, (err, notifications) =>
-      @response.write console.log "Error retrieving notifications", err if err?
+      @response.write "Error retrieving notifications", err if err?
       @response.header "Access-Control-Allow-Origin", "*"
       @response.json notifications unless err?

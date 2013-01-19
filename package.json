@@ -30,6 +30,8 @@
   "dependencies": {
     "zappajs":                ">= 0.4",
     "mongoose":               ">= 3.3",
+    "request":                ">= 2.0",
+    "querystring":            ">= 0.1",
     "jade":                   ">= 0.27",
     "node-markdown":          ">= 0.1",
     "coffee-script":          ">= 1.3"
