@@ -1,6 +1,7 @@
 from twilio.rest import TwilioRestClient
 import urllib
 import cgi
+import os
 from BaseHTTPServer import HTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
@@ -26,7 +27,7 @@ def sendMessage(tel, msg):
   print 'Message sent to user as tel:' + tel + ' and encodedMsg:' + encodedMsg
 
 def TwilioCall(tel, msg):
-  call = client.calls.create(to=tel, 
+  call = client.calls.create(to="+"+tel, 
                            from_=fromTel, 
                            url="http://www.necto.me/notify.xml")
   #print call.sid
