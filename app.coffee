@@ -4,6 +4,10 @@ host = process.env.HOST || "0.0.0.0"
 require('zappajs') host, port, ->
   manifest = require './package.json'
   fs = require 'fs'
+  mongoose = require 'mongoose'
+
+  models = require('./models')
+  Notification = models.notification
 
   @configure =>
     @use 'cookieParser',
@@ -16,8 +20,10 @@ require('zappajs') host, port, ->
 
   @configure
     development: =>
+      mongoose.connect "mongodb://#{host}/#{manifest.name}-dev"
       @use errorHandler: {dumpExceptions: on, showStack: on}
     production: =>
+      mongoose.connect process.env.MONGOHQ_URL || "mongodb://#{host}/#{manifest.name}"
       @use 'errorHandler'
 
   @get '/': ->
@@ -30,3 +36,21 @@ require('zappajs') host, port, ->
 
   @get '/source': ->
     @response.redirect manifest.source
+
+  @get '/notifications': ->
+    Notification.find {}, (err, notifications) =>
+      @response.write console.log "Error retrieving notifications:", err if err?
+      @response.header "Access-Control-Allow-Origin", "*"
+      @response.json notifications unless err?
+
+  @post '/notification/create': ->
+    Notification.create @body, (err, notification) =>
+      @response.write console.log "Error saving notification", notification, err if err?
+      @response.header "Access-Control-Allow-Origin", "*"
+      @response.json notification unless err?
+
+  @get '/notification/list/:uid': ->
+    Notification.find {userId: @params.uid}, (err, notifications) =>
+      @response.write console.log "Error retrieving notifications", err if err?
+      @response.header "Access-Control-Allow-Origin", "*"
+      @response.json notifications unless err?
