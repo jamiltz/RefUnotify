@@ -1,0 +1,37 @@
+{
+  "name":                     "RefUnotify",
+  "version":                  "0.0.1",
+  "description":              "Get alerts delivered to your mobile when there are new matches on the RefUnit database",
+  "homepage":                 "https://refunotify.heroku.com",
+  "source":                   "https://github.com/RefUnite/RefUnotify",
+  "author":                   "Florian Rathgeber <florian.rathgeber@gmail.com>",
+  "keywords": [
+    "node"
+  ],
+  "licenses": [
+    {
+      "type":                 "BSD 3-Clause",
+      "url":                  "http://opensource.org/licenses/bsd-3-clause"
+    }
+  ],
+  "bugs": {
+    "url":                    "https://github.com/RefUnite/RefUnotify/issues"
+  },
+  "repository": {
+    "type":                   "git",
+    "url":                    "git://github.com/RefUnite/RefUnotify.git"
+  },
+  "engines": {
+    "node":                   ">= 0.8.x",
+    "coffee":                 ">= 1.3.x",
+    "jade":                   ">= 0.27",
+    "npm":                    "1"
+  },
+  "dependencies": {
+    "zappajs":                ">= 0.4",
+    "mongoose":               ">= 3.3",
+    "jade":                   ">= 0.27",
+    "node-markdown":          ">= 0.1",
+    "coffee-script":          ">= 1.3"
+  }
+}
