@@ -3,7 +3,7 @@
 Refugees can receive a notification when we detect a new user that matches the criterias of the person they are looking for.
 
 
-# How it works ?
+# How it works
 
 For new users, they will have to create a new account.
 Then, any user can connect this replica of the Refugee United website : http://m.dev.refunite2012.org/language.html
