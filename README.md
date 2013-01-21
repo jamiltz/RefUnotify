@@ -1,4 +1,4 @@
-# RefUnotify
+# RefUnotify => http://hacks.rewiredstate.org/events/refunitedmod/refunotify
 
 Refugees can receive a notification when we detect a new user that matches the criterias of the person they are looking for.
 
